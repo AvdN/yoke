@@ -3,16 +3,9 @@ import re
 from setuptools import setup, find_packages
 
 
-INSTALL_REQUIRES = [
-    'boto3>=1.4.2',
-    'botocore>=1.4.85',
-    'docker>=2.0.0',
-    'Jinja2>=2.8',
-    'jsonref>=0.1',
-    'lambda-uploader>=1.2.0',
-    'retrying>=1.3.3',
-    'ruamel.yaml>=0.11.11'
-]
+def install_requires():
+    with open('requirements.txt') as fp:
+        return [line for line in fp if line and line[0] != '#']
 
 
 def package_meta():
@@ -48,7 +41,7 @@ setup(
     version=meta['version'],
     packages=find_packages(exclude=['tests', 'examples']),
     test_suite='tests',
-    install_requires=INSTALL_REQUIRES,
+    install_requires=install_requires(),
     classifiers=[
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.6",
